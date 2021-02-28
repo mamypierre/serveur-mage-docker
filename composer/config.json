@@ -1,0 +1,23 @@
+{
+  "config": {
+    "platform": {
+      "php": "7.4",
+      "ext-bcmath": "0",
+      "ext-ctype": "0",
+      "ext-curl": "0",
+      "ext-dom": "0",
+      "ext-gd": "0",
+      "ext-hash": "0",
+      "ext-iconv": "0",
+      "ext-intl": "0",
+      "ext-mbstring": "0",
+      "ext-openssl": "0",
+      "ext-pdo_mysql": "0",
+      "ext-simplexml": "0",
+      "ext-soap": "0",
+      "ext-xsl": "0",
+      "ext-zip": "0",
+      "ext-sockets": "0"
+    }
+  }
+}

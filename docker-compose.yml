@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  site_apache:
+    build:
+      context: .
+      dockerfile: apache.dockerfile
+    container_name: apache1
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/usr/local/apache2/htdocs
+      - ./apache/logs:/usr/local/apache2/logs
+    depends_on:
+      - php
+      - composer
+      - elasticsearch
+      - mysql
+
+  mysql:
+    image: mysql:5.7.29
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: php
+    volumes:
+      - ./src:/usr/local/apache2/htdocs:delegated
+    ports:
+      - "9000:9000"
+  composer:
+    build:
+      context: .
+      dockerfile: composer.dockerfile
+    container_name: composer
+    volumes:
+      - ./src:/usr/local/apache2/htdocs
+    working_dir: /usr/local/apache2/htdocs
+  elasticsearch:
+    image: elasticsearch:7.9.2
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      discovery.type: single-node
+      network.host: 0.0.0.0
