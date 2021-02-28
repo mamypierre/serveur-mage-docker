@@ -7,3 +7,4 @@ To get started, make sure you have [Docker installed](https://docs.docker.com/do
 Next, navigate in your terminal to the directory you cloned this, and spin up the containers for the web server by running `docker-compose up -d --build site_apache`.
 
 - `docker exec composer composer update`
+delete line 131 to 133 on /Users/mamy/Desktop/projet/docker/apache-php-mysql/src/magento_docker/vendor/laminas/laminas-captcha/src/Image.php
